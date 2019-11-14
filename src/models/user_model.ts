@@ -7,13 +7,13 @@ const UserSchema = new Schema({
     phone : {
         type : Number
     },
-    mail : {
+    email : {
         type : String
     },
     password : {
         type : String
     },
-    routes : [{
+    pets : [{
         type : Schema.Types.ObjectId,
         ref : 'Pet',
     }],

@@ -11,15 +11,13 @@ class PetRoutes {
         this.routes;
     };
 
-    async getRoutes(request : Request, response : Response){
+    async getPets(request : Request, response : Response){
         const pet = await Pet.find();
         response.json(pet);
     }
 
     async createPet(request : Request, response : Response){
         try{
-
-        console.log(request.body);
 
         const newPet =  await new Pet();
 
@@ -28,8 +26,6 @@ class PetRoutes {
         }).then(()=>{
             response.status(202).send(newPet);
         });
-
-        //response.send({ok:true});
         
         }catch(error){
             console.log(error);
@@ -37,7 +33,7 @@ class PetRoutes {
     }
 
     routes (){
-        this.router.get('/getPets', this.getRoutes);
+        this.router.get('/getPets', this.getPets);
         this.router.post('/createPet', this.createPet);
     }
 }

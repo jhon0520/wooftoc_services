@@ -1,6 +1,6 @@
 import {Schema, model} from 'mongoose';
 
-const RouterSchema = new Schema({
+const PetSchema = new Schema({
     urlPhoto : {
         type : String
     },
@@ -21,4 +21,4 @@ const RouterSchema = new Schema({
     }
 });
 
-export default model('Route', RouterSchema);
+export default model('Pet', PetSchema);
