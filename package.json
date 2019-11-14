@@ -1,0 +1,34 @@
+{
+  "name": "wooftoc_services",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compiling": "npx tsc",
+    "dev": "ts-node ./src/index.ts",
+    "clean": "rimraf ./dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.1",
+    "@types/helmet": "0.0.44",
+    "@types/mongoose": "^5.5.17",
+    "@types/morgan": "^1.7.37",
+    "@types/nodemailer": "^6.2.2",
+    "nodemon": "^1.19.3",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "mongoose": "^5.7.1",
+    "morgan": "^1.9.1",
+    "nodemailer": "^6.3.1",
+    "rimraf": "^3.0.0"
+  }
+}
