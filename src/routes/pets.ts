@@ -38,7 +38,7 @@ class PetRoutes {
     }
 }
 
-const routeRoutes = new PetRoutes();
-routeRoutes.routes();
+const petRoutes = new PetRoutes();
+petRoutes.routes();
 
-export default routeRoutes.router;
+export default petRoutes.router;

@@ -1,6 +1,7 @@
 import {Router, Request, Response} from 'express';
 
 import User from '../models/user_model'
+import MailOptions from '../logic/mailOptions';
 
 class UserRoutes {
     
@@ -17,6 +18,8 @@ class UserRoutes {
     }
 
     async createUser(request : Request, response : Response){
+
+        const mail = new MailOptions();
         
         const {name, phone, email, password} = request.body;
         const newUser =  await new User({name, phone, email, password});
@@ -26,6 +29,7 @@ class UserRoutes {
         }).then(()=>{
             let userchanged = newUser.toJSON();
             delete userchanged.password;
+            mail.send(email);
             return response.status(202).send(userchanged);
         });
     }
