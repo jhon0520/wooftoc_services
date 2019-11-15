@@ -55,8 +55,7 @@ class UserRoutes {
         if(user != null){
 
             let userchanged = user.toJSON();
-            userchanged.routes.push(request.body.id);
-            userchanged.toursNumbers = userchanged.toursNumbers + 1;
+            userchanged.pets.push(request.body.id);
             delete userchanged.password;
 
             const newUser = await User.findOneAndUpdate({email : request.body.email}, userchanged, {new : true}).populate('routes'); //.populate('routes')
