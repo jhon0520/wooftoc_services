@@ -58,7 +58,7 @@ class UserRoutes {
             userchanged.pets.push(request.body.id);
             delete userchanged.password;
 
-            const newUser = await User.findOneAndUpdate({email : request.body.email}, userchanged, {new : true}).populate('routes'); //.populate('routes')
+            const newUser = await User.findOneAndUpdate({email : request.body.email}, userchanged, {new : true}).populate('pets'); //.populate('routes')
             
             response.status(200).send(newUser);
         }else{
