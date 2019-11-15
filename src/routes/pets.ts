@@ -19,7 +19,8 @@ class PetRoutes {
     async createPet(request : Request, response : Response){
         try{
 
-        const newPet =  await new Pet();
+        const {urlPhoto, name, size, race, age, gender} = request.body;
+        const newPet =  await new Pet({urlPhoto, name, size, race, age, gender});
 
         await newPet.save().catch((error)=>{
             return response.status(404).send({response: false, message : error.message});
