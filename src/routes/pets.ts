@@ -1,5 +1,6 @@
 import {Router, Request, Response} from 'express';
 
+import User from '../models/user_model';
 import Pet from '../models/pet_model'
 
 class PetRoutes {
@@ -19,17 +20,34 @@ class PetRoutes {
     async createPet(request : Request, response : Response){
         try{
 
-        const {urlPhoto, name, size, race, age, gender} = request.body;
+        const {email, urlPhoto, name, size, race, age, gender} = request.body;
         const newPet =  await new Pet({urlPhoto, name, size, race, age, gender});
 
-        await newPet.save().catch((error)=>{
-            return response.status(404).send({response: false, message : error.message});
-        }).then(()=>{
-            response.status(202).send(newPet);
-        });
+        let pet = await newPet.save();
+
+        if(pet){
+            let user = await User.findOne({email});
+
+            if(user != null){
+
+                let userchanged = user.toJSON();
+                userchanged.pets.push(pet._id);
+                delete userchanged.password;
+
+                console.log(userchanged);
+    
+                const newUser = await User.findOneAndUpdate({email}, userchanged, {new : true}).populate('pets');
+                
+                response.status(200).send(newUser);
+            }else{
+                
+                response.status(400).send({response : false, message : "Fail to load user."})
+            }
+        }
         
         }catch(error){
             console.log(error);
+            response.status(404).send({response: false, message : error.message});
         }
     }
 
