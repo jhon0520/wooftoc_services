@@ -2,6 +2,7 @@ import {Router, Request, Response} from 'express';
 
 import User from '../models/user_model';
 import Pet from '../models/pet_model'
+import MailOptions from '../logic/mailOptions';
 
 class PetRoutes {
     
@@ -51,9 +52,21 @@ class PetRoutes {
         }
     }
 
+    async createService (request : Request, response : Response){
+        const mail = new MailOptions();
+
+        const {tipo, direccion, hora, telefono} = request.body
+
+        mail.sendMailServices(tipo, direccion, hora, telefono);
+
+        response.status(200).send({response : true});
+
+    }
+
     routes (){
         this.router.get('/getPets', this.getPets);
         this.router.post('/createPet', this.createPet);
+        this.router.post('/createService', this.createService)
     }
 }
 
